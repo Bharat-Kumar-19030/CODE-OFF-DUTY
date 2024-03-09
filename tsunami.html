@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+      /* Your CSS styles here */
+      
+      image {
+          margin: 0;
+          font-family: Arial, sans-serif;
+    background-color: rgb(223, 208, 79);
+      background-image: url(90.jpg);
+      
+    
+      }
+      .text{
+          padding:10px;
+          font-size: 20px;
+          font-style: italic;
+          /*font-weight: bold;*/
+      }
+
+      .header {
+          background-image: url('27020.jpg');
+          background-size: cover;
+          padding: 20px;
+          text-align: center;
+      
+      }
+
+      .btn {
+          background-color: #F83C29;
+          border: none;
+          color: white;
+          padding: 12px 16px;
+          font-size: 16px;
+          cursor: pointer;
+          margin: 5px;
+          border-radius: 25px;
+      }
+
+      .btn:hover {
+          background-color: #FFD9D3;
+    color: #F83C29;
+      }
+
+.btn-light {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/*.btn-light::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  border-radius: 25px;
+  animation: runLight 4s infinite alternate;
+}*/
+
+@keyframes runLight {
+  0%, 100% {
+      width: 100%;
+      height: 100%;
+      background-color: transparent;
+  }
+  50% {
+      width: 150%;
+      height: 150%;
+      background-color: #F83C29; /* Change the color as needed */
+  }
+}
+
+
+      .search-container {
+          display: flex;
+          align-items: center;
+          margin-bottom: 20px;
+      }
+
+      .search-box {
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          width: 200px;
+          margin-right: 10px;
+      }
+
+      .search-btn {
+          background-color: #F83C29;
+          border: none;
+          color: white;
+          padding: 10px;
+          border-radius: 5px;
+          cursor: pointer;
+      }
+
+      .popup {
+          display: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.7);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+    z-index: 2;
+      }
+
+ 
+      .popup-form {
+          background-image: url('ppp.jpg');
+          background-size: cover;
+          padding: 20px;
+          border-radius: 10px;
+          width: 900px;
+          height: 500px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          position: relative;
+      }
+
+      .close-btn {
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          background-color: #73C6B6;
+          border: none;
+          color: white;
+          padding: 5px 10px;
+          border-radius: 5px;
+          cursor: pointer;
+      }
+
+      .catalog {
+          text-align: center;
+          margin: 40px 0;
+      }
+
+      .book-list {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          align-items: center;
+      }
+
+      .book {
+          margin: 20px;
+          text-align: center;
+          flex-basis: 16.66%; /* 6 books per row */
+          position: relative;
+          overflow: hidden;
+          animation: zoomInOut 3s infinite alternate; /* Adjust the animation duration as needed */
+      }
+
+      .book img {
+  /* Existing styles... */
+  width: 200px; /* Adjust the width as needed */
+  height: 300px; /* Adjust the height as needed */
+  object-fit: cover;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease-in-out;
+  animation: zoomInOut 3s infinite alternate; /* Adjust the animation duration as needed */
+
+  /* Add glowing effect with changing color */
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  0%, 100% {
+      box-shadow: 0 0 10px #FFD9D3, 0 0 20px #FFD9D3, 0 0 30px #FFD9D3;
+  }
+  50% {
+      box-shadow: 0 0 10px #67ff62, 0 0 20px #67ff62, 0 0 30px #67ff62;
+  }
+}
+
+
+
+
+@keyframes zoomInOut {
+  0%, 100% {
+      transform: scale(1); /* Initial and final state (normal size) */
+  }
+  50% {
+      transform: scale(1.1); /* Zoomed in state */
+  }
+}
+
+
+.book img:hover {
+  transform: scale(1.1); /* Adjust the scale factor as needed */
+}
+
+.cat-points {
+  text-align: center;
+  margin-top: 80px;
+  white-space: nowrap;
+  overflow: hidden;
+  position: relative;
+  /*z-index: 3; *//* Set a higher z-index value */
+}
+
+.point {
+  display: inline-block;
+  margin: 30px; /* Adjust as needed */
+  padding: 10px;
+  border-radius: 5px;
+  position: relative;
+  opacity: 0;
+  transform: translateY(30px); /* Initial position for sliding effect */
+  animation: slideIn 5s infinite; /* Apply sliding animation */
+}
+
+.point:nth-child(1) {
+  background-color: #51ADFF; /* Pink */
+  animation-delay: 0s; /* No delay for the first point */
+}
+
+.point:nth-child(2) {
+  background-color: #D655FF; /* Purple */
+  animation-delay: 1s; /* Delay for the second point */
+}
+
+.point:nth-child(3) {
+  background-color: #FFF300; /* Red */
+  animation-delay: 2s; /* Delay for the third point */
+}
+
+.point:nth-child(4) {
+  background-color: #50F716; /* Blue */
+  animation-delay: 3s; /* Delay for the fourth point */
+}
+
+.point:nth-child(5) {
+  background-color: #16F7D8; /* Green */
+  animation-delay: 4s; /* Delay for the fifth point */
+}
+
+@keyframes slideIn {
+  0%, 100% {
+      opacity: 0;
+      transform: translateY(30px);
+  }
+  20%, 80% {
+      opacity: 1;
+      transform: translateY(0);
+  }}
+
+.card-container {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+      }
+
+      .card {
+          width: 450px;
+          height: 250px;
+          margin:10px;
+          perspective: 1000px;
+          border-radius:6px;
+      }
+
+      .card-inner {
+          width: 100%;
+          height: 100%;
+          text-align: center;
+          transition: transform 0.8s;
+          transform-style: preserve-3d;
+      }
+
+      .card.active .card-inner {
+          transform: rotateY(180deg);
+      }
+
+      .card-front,
+      .card-back {
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          backface-visibility: hidden;
+      }
+
+      .card-back {
+          transform: rotateY(180deg);
+          background: #7be971;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+      }
+
+
+      .contact {
+padding: 80px 0px;
+background: linear-gradient(to right, #000000, #5ef759);
+}
+
+.contact .content {
+-webkit-display: flex;
+display: flex;
+}
+
+.contact .content .box {
+flex: 0 0 50%;
+max-width: 50%;
+padding: 15px;
+}
+
+.contact .content .form input,
+.contact .content .form textarea {
+height: 45px;
+width: 100%;
+padding: 6px 12px;
+margin-bottom: 25px;
+background-color: transparent;
+border: 1px solid #ffffff;
+font-family: 'Open-sans', sans-serif;
+color: #ffffff;
+}
+
+.contact .content .form input:focus,
+.contact .content .form textarea:focus {
+outline: none;
+}
+
+.contact .content .form input::placeholder,
+.contact .content .form textarea::placeholder {
+color: #ffffff;
+}
+
+.contact .content .form textarea {
+height: 100px;
+}
+
+.contact .content .form button {
+border: none;
+outline: none;
+box-shadow: none;
+height: 45px;
+padding: 0px 50px;
+border: 1px solid transparent;
+background-color: #c11325;
+color: #ffffff;
+font-size: 15px;
+transition: all .5s ease;
+cursor: pointer;
+}
+
+.contact .content .form button:hover {
+background-color: transparent;
+color: #ffffff;
+border-color: #ffffff;
+}
+
+.contact .content .text h2 {
+font-size: 30px;
+font-weight: 500;
+color: #ffffff;
+padding: 0px 0px 20px;
+}
+
+.contact .content .text p {
+font-size: 15px;
+line-height: 20px;
+color: #ffffff;
+margin: 0;
+padding: 0px 0px 30px;
+font-family: 'Open-sans', sans-serif;
+}
+
+.contact .content .text .info ul {
+list-style: none;
+padding: 0;
+margin: 0;
+}
+
+.contact .content .text .info li {
+display: block;
+margin-bottom: 15px;
+color: #ffffff;
+font-size: 15px;
+letter-spacing: 1px;
+position: relative;
+padding-left: 40px;
+font-family: 'Open-Sans', sans-serif;
+}
+
+.contact .content .text .info li span {
+display: inline-block;
+position: absolute;
+left: 0px;
+top: 0px;
+font-size: 20px;
+color: rgb(60, 223, 237);
+}
+
+.contact .content .text .social {
+padding-top: 30px;
+}
+
+.contact .content .text .social a {
+height: 40px;
+width: 40px;
+line-height: 40px;
+text-align: center;
+background-color: rgb(19, 91, 193);
+text-decoration: none;
+display: inline-block;
+margin-right: 10px;
+transition: all .5s ease;
+border: 1px solid transparent;
+}
+
+.contact .content .text .social a:hover {
+background-color: transparent;
+border-color: #ffffff;
+}
+
+.contact .content .text .social a span {
+color: #ffffff;
+font-size: 20px;
+}
+
+.contact .content .text .copy {
+border-top: 1px solid #333333;
+margin-top: 30px;
+padding-top: 20px;
+color: #c5c5c5;
+font-size: 30px;
+}
+
+
+
+  </style>
+
+  </head>
+<body>
+    <!-- <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Navbar</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Dropdown
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+              </li>
+            </ul>
+            <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </nav> -->
+      <div style="background-color: #69ff69">
+        <button class="btn btn-light" onclick="window.location.href = 'hello.html';">Home</button>
+    <button class="btn btn-light" onclick="window.location.href = 'https://www.google.com/';">Search</button>
+    <button class="btn btn-light" onclick="window.location.href = 'hello.html#contact'">Contact Us</button>
+    <span  style="margin-right: 20px;margin-top: 5px; float: right;">
+        <input type="text" class="search-box" placeholder="Search...">
+        <button class="search-btn">Search</button>
+        
+    </span>
+    <br>
+    </div>
+    <table >
+        <tr>
+          <td style="margin-top: 0px;"><img src="4.jpg" alt="..." style="height:500px;width:600px;margin:auto;margin-top:0px"></td>
+          <td style="margin-left:100px;padding-left: 50px;margin-top: 0px;height:400px;width:400px"><p style="margin-left:400px;padding-left: 300px;"><h3>
+            Here are some precautions that you can take before and during Tsunami:</h3>
+            <b>Before a tsunami</b><br>
+1. Listen to your radio for tsunami warnings<br>
+2. Be alert for early warnings<br>
+3. Turn off water, gas, and electricity if you are in a dangerous area<br>
+4. Check your home and land for any potential dangers related to flooding<br>
+5. Identify any vulnerability and repair it<br>
+6. Learn how to turn off the gas and electricity in your house<br>
+7. Do not store your important documents in the basement<br>
+8. Ensure that your family has an emergency kit and plan<br>
+	<b>During a tsunami</b><br>
+1. If you can move safely, move quickly to high ground or inland<br>
+2. If you're trapped, climb to the top of a building<br>
+3. Go as far inland as possible<br>
+4. Grab something floating if you're in the water<br>
+5. Go out to sea if you're in a boat<br>
+6. Listen to news and evacuate immediately if told to do so by staying away from beaches and returning home only when authorities say it's safe</p>
+</td>
+          
+        </tr>
+        
+    </table>
+    <hr>
+    <div style="text-align: center;display: block; font-size: 40px;">Mock Exercises</div>
+    
+     
+    <br>
+    <div style="text-align:  center;margin: auto;;" ><button style="background-color: #5ef759;color: blue;"><a href="qtsu.html" style="text-decoration:none"><b>Take Quiz</b></a></button></div>
+    <br>
+    <br>
+</div>
+
+      
+</body>
+</html>

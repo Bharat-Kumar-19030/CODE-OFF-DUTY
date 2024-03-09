@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Your CSS styles here */
+        
+        image {
+            margin: 0;
+            font-family: Arial, sans-serif;
+	    background-color: rgb(223, 208, 79);
+        background-image: url(90.jpg);
+        
+	    
+        }
+        .text{
+            padding:10px;
+            font-size: 20px;
+            font-style: italic;
+            /*font-weight: bold;*/
+        }
+
+        .header {
+            background-image: url('27020.jpg');
+            background-size: cover;
+            padding: 20px;
+            text-align: center;
+        
+        }
+
+        .btn {
+            background-color: #F83C29;
+            border: none;
+            color: white;
+            padding: 12px 16px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 5px;
+            border-radius: 25px;
+        }
+
+        .btn:hover {
+            background-color: #FFD9D3;
+	    color: #F83C29;
+        }
+
+.btn-light {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/*.btn-light::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    border-radius: 25px;
+    animation: runLight 4s infinite alternate;
+}*/
+
+@keyframes runLight {
+    0%, 100% {
+        width: 100%;
+        height: 100%;
+        background-color: transparent;
+    }
+    50% {
+        width: 150%;
+        height: 150%;
+        background-color: #F83C29; /* Change the color as needed */
+    }
+}
+
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .search-box {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 200px;
+            margin-right: 10px;
+        }
+
+        .search-btn {
+            background-color: #F83C29;
+            border: none;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+	    z-index: 2;
+        }
+	
+	 
+        .popup-form {
+            background-image: url('ppp.jpg');
+            background-size: cover;
+            padding: 20px;
+            border-radius: 10px;
+            width: 900px;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #73C6B6;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .catalog {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .book-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .book {
+            margin: 20px;
+            text-align: center;
+            flex-basis: 16.66%; /* 6 books per row */
+            position: relative;
+            overflow: hidden;
+            animation: zoomInOut 3s infinite alternate; /* Adjust the animation duration as needed */
+        }
+
+        .book img {
+    /* Existing styles... */
+    width: 200px; /* Adjust the width as needed */
+    height: 300px; /* Adjust the height as needed */
+    object-fit: cover;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    transition: transform 0.3s ease-in-out;
+    animation: zoomInOut 3s infinite alternate; /* Adjust the animation duration as needed */
+
+    /* Add glowing effect with changing color */
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 10px #FFD9D3, 0 0 20px #FFD9D3, 0 0 30px #FFD9D3;
+    }
+    50% {
+        box-shadow: 0 0 10px #67ff62, 0 0 20px #67ff62, 0 0 30px #67ff62;
+    }
+}
+
+
+
+
+@keyframes zoomInOut {
+    0%, 100% {
+        transform: scale(1); /* Initial and final state (normal size) */
+    }
+    50% {
+        transform: scale(1.1); /* Zoomed in state */
+    }
+}
+
+
+.book img:hover {
+    transform: scale(1.1); /* Adjust the scale factor as needed */
+}
+
+.cat-points {
+    text-align: center;
+    margin-top: 80px;
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+    /*z-index: 3; *//* Set a higher z-index value */
+}
+
+.point {
+    display: inline-block;
+    margin: 30px; /* Adjust as needed */
+    padding: 10px;
+    border-radius: 5px;
+    position: relative;
+    opacity: 0;
+    transform: translateY(30px); /* Initial position for sliding effect */
+    animation: slideIn 5s infinite; /* Apply sliding animation */
+}
+
+.point:nth-child(1) {
+    background-color: #51ADFF; /* Pink */
+    animation-delay: 0s; /* No delay for the first point */
+}
+
+.point:nth-child(2) {
+    background-color: #D655FF; /* Purple */
+    animation-delay: 1s; /* Delay for the second point */
+}
+
+.point:nth-child(3) {
+    background-color: #FFF300; /* Red */
+    animation-delay: 2s; /* Delay for the third point */
+}
+
+.point:nth-child(4) {
+    background-color: #50F716; /* Blue */
+    animation-delay: 3s; /* Delay for the fourth point */
+}
+
+.point:nth-child(5) {
+    background-color: #16F7D8; /* Green */
+    animation-delay: 4s; /* Delay for the fifth point */
+}
+
+@keyframes slideIn {
+    0%, 100% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    20%, 80% {
+        opacity: 1;
+        transform: translateY(0);
+    }}
+
+.card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .card {
+            width: 450px;
+            height: 250px;
+            margin:10px;
+            perspective: 1000px;
+            border-radius:6px;
+        }
+
+        .card-inner {
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+
+        .card.active .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front,
+        .card-back {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            backface-visibility: hidden;
+        }
+
+        .card-back {
+            transform: rotateY(180deg);
+            background: #7be971;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        .contact {
+	padding: 80px 0px;
+	background: linear-gradient(to right, #000000, #5ef759);
+}
+
+.contact .content {
+	-webkit-display: flex;
+	display: flex;
+}
+
+.contact .content .box {
+	flex: 0 0 50%;
+	max-width: 50%;
+	padding: 15px;
+}
+
+.contact .content .form input,
+.contact .content .form textarea {
+	height: 45px;
+	width: 100%;
+	padding: 6px 12px;
+	margin-bottom: 25px;
+	background-color: transparent;
+	border: 1px solid #ffffff;
+	font-family: 'Open-sans', sans-serif;
+	color: #ffffff;
+}
+
+.contact .content .form input:focus,
+.contact .content .form textarea:focus {
+	outline: none;
+}
+
+.contact .content .form input::placeholder,
+.contact .content .form textarea::placeholder {
+	color: #ffffff;
+}
+
+.contact .content .form textarea {
+	height: 100px;
+}
+
+.contact .content .form button {
+	border: none;
+	outline: none;
+	box-shadow: none;
+	height: 45px;
+	padding: 0px 50px;
+	border: 1px solid transparent;
+	background-color: #c11325;
+	color: #ffffff;
+	font-size: 15px;
+	transition: all .5s ease;
+	cursor: pointer;
+}
+
+.contact .content .form button:hover {
+	background-color: transparent;
+	color: #ffffff;
+	border-color: #ffffff;
+}
+
+.contact .content .text h2 {
+	font-size: 30px;
+	font-weight: 500;
+	color: #ffffff;
+	padding: 0px 0px 20px;
+}
+
+.contact .content .text p {
+	font-size: 15px;
+	line-height: 20px;
+	color: #ffffff;
+	margin: 0;
+	padding: 0px 0px 30px;
+	font-family: 'Open-sans', sans-serif;
+}
+
+.contact .content .text .info ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.contact .content .text .info li {
+	display: block;
+	margin-bottom: 15px;
+	color: #ffffff;
+	font-size: 15px;
+	letter-spacing: 1px;
+	position: relative;
+	padding-left: 40px;
+	font-family: 'Open-Sans', sans-serif;
+}
+
+.contact .content .text .info li span {
+	display: inline-block;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	font-size: 20px;
+	color: rgb(60, 223, 237);
+}
+
+.contact .content .text .social {
+	padding-top: 30px;
+}
+
+.contact .content .text .social a {
+	height: 40px;
+	width: 40px;
+	line-height: 40px;
+	text-align: center;
+	background-color: rgb(19, 91, 193);
+	text-decoration: none;
+	display: inline-block;
+	margin-right: 10px;
+	transition: all .5s ease;
+	border: 1px solid transparent;
+}
+
+.contact .content .text .social a:hover {
+	background-color: transparent;
+	border-color: #ffffff;
+}
+
+.contact .content .text .social a span {
+	color: #ffffff;
+	font-size: 20px;
+}
+
+.contact .content .text .copy {
+	border-top: 1px solid #333333;
+	margin-top: 30px;
+	padding-top: 20px;
+	color: #c5c5c5;
+	font-size: 30px;
+}
+@import url('https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap');
+@import url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
+
+
+
+    </style>
+</head>
+
+<body>
+    <div style="background-color: #69ff69">
+    <button class="btn btn-light" onclick="window.location.href = 'hello.html';">Home</button>
+<button class="btn btn-light" onclick="window.location.href = 'https://www.google.com/';">Search</button>
+<button class="btn btn-light" onclick="window.location.href = 'hello.html#contact'">Contact Us</button>
+<!-- <button class="btn btn-light" onclick="showSignInForm()">Sign In</button> -->
+<span  style="margin-right: 20px;margin-top: 5px; float: right;">
+    <input type="text" class="search-box" placeholder="Search...">
+    <a href="hello.html"><button class="search-btn">Search</button></a>
+    
+</span>
+<br>
+</div>
+    <div class="bg-image">
+        
+    <div class="header">
+        <br><br>
+        <br>
+        <br><br><br>
+        <br>
+        <br>
+        <h1 style="color: #f8fcff; font-size: 80px; font-family:arabic;">National Disaster Management</h1>
+        
+    </div>
+        
+
+
+    </div>
+
+<div class="cat-points" style="margin-top: 20px;">
+    <div class="point">Quick Disaster Response</div>
+    <div class="point">Urban Search and Rescue (USAR)</div>
+    <div class="point">Disaster Preparedness and Mitigation</div>
+    <div class="point">Internation Response and Cooperation</div>
+    <!--<div class="point"></div>-->
+  </div>
+  <div class="card-container">
+    <div class="card" onclick="rotateCard(this)">
+        <div class="card-inner">
+            <div class="card-front">
+                <img src="3.jpg" alt="Image 1">
+            </div>
+            <div class="card-back">
+                <div class="text">A volcano is an opening in the earth’s crust through which lava, volcanic ash, and gases escape. Volcanic eruptions are partly driven by pressure from dissolved gas, much as escaping gases force the cork out of a bottle of champagne.</div>
+            </div>
+        </div>
+    </div>
+    <!-- Add more card elements here -->
+    <div class="card" onclick="rotateCard(this)">
+        <div class="card-inner">
+            <div class="card-front">
+                <img src="2.jpg" alt="Image 2">
+            </div>
+            <div class="card-back">
+                <div class="text">Earthquake, any sudden shaking of the ground caused by the passage of seismic waves through Earth’s rocks. Seismic waves are produced when some form of energy stored in Earth’s crust is suddenly released, usually when masses of rock straining against one another suddenly fracture and “slip”.
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card" onclick="rotateCard(this)">
+        <div class="card-inner">
+            <div class="card-front">
+                <img src="4.jpg" alt="Image 3">
+                <p style="color:red;font-size:30px">↑ click to flip ↑<br><br></p>
+            </div>
+            <div class="card-back">
+                <div class="text">Tsunamis are giant waves caused by earthquakes or volcanic eruptions under the sea. Out in the depths of the ocean, tsunami waves do not dramatically increase in height. But as the waves travel inland, they build up to higher and higher heights as the depth of the ocean decreases. 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br><br>
+
+    <div class="catalog">
+        <div style="font-size: 30px;font-weight: bold;"><h1>Learn about Disasters</h1></div>
+        <div class="book-list">
+            <!-- 6 books per row and 5 rows in total -->
+            <!-- 30 copies of the first book details -->
+            <div class="book">
+                <a href="tsunami.html" ><img src="5.jpg" alt="Tsunami">
+ </a>               <h2>Tsunami</h2>
+                <!--<p>Exercise</p>
+                <p>Genre: Genre 1</p>-->
+            </div>
+            <div class="book">
+                <a href="volcano.html" ><img src="6.jpg" alt="volcano">
+ </a>               <h2>Volcano</h2>
+                <!--<p>Author: Author 1</p>
+                <p>Genre: Genre 1</p>-->
+            </div>
+            <div class="book">
+                <a href="floods.html" ><img src="7.jpg" alt="flood">
+   </a>             <h2>Floods</h2>
+               
+            </div>
+            <div class="book">
+                <a href="drought.html" ><img src="8.jpg" alt="drought">
+ </a>               <h2>Drought</h2>
+            </div>
+            <div class="book">
+                <a href="landslides.html" ><img src="9.jpg" alt="landslide"></a>
+                <h2>Landslide</h2>
+            </div>
+            
+
+            <!-- Copy the above book details 29 more times -->
+            <!-- 30 copies in total -->
+            <!-- Repeat the above 6 books in a row 5 times -->
+        </div>
+    </div>
+<div class="catalog">
+        <!--<h2>Romantic</h2>-->
+        <div class="book-list">
+            <!-- 6 books per row and 5 rows in total -->
+            <!-- 30 copies of the first book details -->
+            <div class="book">
+                
+                <a href="forestfire.html"><img src="10.jpg" alt="Book 1"></a>
+                <h2>Forest Fire</h2>
+                
+            </div>
+            <div class="book">
+                <a href="cyclone.html" ><img src="11.jpg" alt="Book 1">
+ </a>               <h2>Cyclone</h2>
+            </div>
+            <div class="book">
+                <a href="tornado.html" ><img src="12.jpg" alt="Book 1">
+ </a>               <h2>Tornado</h2>
+            </div>
+            <div class="book">
+                <a href="sandstorm.html" ><img src="13.jpg" alt="Book 1">
+ </a>               <h2>Sandstorms</h2>
+            </div>
+            <div class="book">
+                <a href="avalanche.html" ><img src="14.jpg" alt="Book 1">
+ </a>               <h2>Avalanche</h2>
+            </div>
+
+            <!-- Start Contact -->
+	<section class="contact" id="contact">
+		<div class="container">
+			<div class="content">
+				<div class="box form wow slideInLeft">
+					<form  action="#" onSubmit="alert('Thank you for your feedback. \nStay with us for future updates!')" >
+						<input type="text" placeholder="Enter Name">
+						<input type="text" placeholder="Enter Email">
+						<input type="text" placeholder="Enter Mobile">
+						<textarea placeholder="Enter Message"></textarea>
+						<button type="submit" value="submit">Send Message</button>
+					</form>
+				</div>
+                <div class="box text wow slideInRight">
+					<h2>Any Suggestions or Questions? </h2>
+					<p class="title-p">"Saving Lives & Beyond... 😀"</p>
+					<div class="info" style="text-align: left;margin-left:110px">
+						<ul>
+							<li><span class="fa fa-map-marker"></span> Punjab, Phagwara - 144401</li>
+							<li><span class="fa fa-phone"></span>1800-6789-90:</li>
+							<li><span class="fa fa-envelope"></span> bharatkumar19030@gmail.com<br></li>
+                            <li><span class="fa fa-envelope"></span> sadarhussain0001@gmail.com<br></li>
+                            <li><span class="fa fa-envelope"></span> amarsahani0777@gmail.com<br></li>
+                            <li><span class="fa fa-envelope"></span> abhaychaudhary3521@gmail.com<br></li>
+						</ul>
+					</div>
+					<div class="social">
+
+						<a href=""><span class="fa fa-linkedin"></span></a>
+						<a href=""><span class="fa fa-skype"></span></a>
+						<a href=""><span class="fa fa-youtube-play"></span></a>
+					</div>
+
+
+				</div>
+			</div>
+		</div>
+	</section>
+	
+    <script>
+        function showSignInForm() {
+            var popup = document.getElementById("signInPopup");
+            popup.style.display = "flex";
+        }
+
+        function hideSignInForm() {
+            var popup = document.getElementById("signInPopup");
+            popup.style.display = "none";
+        }
+
+        function rotateCard(element) {
+            element.classList.toggle('active');
+        }
+    </script>
+        </div>
+</body>
+
+</html>
