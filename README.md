@@ -1,5 +1,7 @@
 # CODE-OFF-DUTY
 
+**To run the project please visit the hello.html file of the project**
+
 **Problem_statement: Awareness and Preparedness Towards Disaster Management**
 Decription: scenarios and test the response capabilities of various agencies involved in disaster management. These exercises are crucial in identifying gaps in our preparedness and response capabilities and help in improving them To benefit from these programs, it is important to give a notification regarding mock exercises, SSP, and CAP conducted by various stakeholders such as NDRF/SDRF, etc., to concern people so that they registered timely and became a beneficiary/ a part of the exercise. This will enable to concern to be prepared for any eventualities that may occur in the future. The system provides the contact number, links, and information regarding Disaster Management Authorities. Datasheet of various previous disasters, do's, and don'ts, it may include early warning of disaster.
 
